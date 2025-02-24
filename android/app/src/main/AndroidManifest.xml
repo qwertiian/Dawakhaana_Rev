@@ -2,6 +2,10 @@
     <!-- Add the POST_NOTIFICATIONS permission here -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- Add location permissions here -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:label="dawakhaana2"
         android:name="${applicationName}"
