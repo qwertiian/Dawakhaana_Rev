@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "39026901506",
+    "project_id": "duhacks-7598a",
+    "storage_bucket": "duhacks-7598a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39026901506:android:5852b093d9a41862669d1b",
+        "android_client_info": {
+          "package_name": "com.example.dawakhaana2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Cd8ueFG0OvRYi6xKlNlouOonujKbr9o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
