@@ -11,10 +11,33 @@ class LocationPage extends StatelessWidget {
     // Check if location services are enabled
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Location services are disabled. Please enable them.')),
+      // Prompt the user to enable location services
+      bool enableService = await showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Location Services Disabled'),
+          content: Text('Please enable location services to use this feature.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text('Enable'),
+            ),
+          ],
+        ),
       );
-      return;
+
+      if (enableService == true) {
+        // Open location settings
+        await Geolocator.openLocationSettings();
+        return;
+      } else {
+        // User canceled, do nothing
+        return;
+      }
     }
 
     // Check and request location permissions
@@ -33,6 +56,8 @@ class LocationPage extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Location permissions are permanently denied. Please enable them in app settings.')),
       );
+      // Open app settings to allow the user to enable permissions manually
+      await Geolocator.openAppSettings();
       return;
     }
 
