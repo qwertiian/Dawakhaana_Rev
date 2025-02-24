@@ -41,17 +41,15 @@ class _FinalPaymentPageState extends State<FinalPaymentPage> {
     _createOrder(); // Create order when the page initializes
   }
 
-
   Future<void> _createOrder() async {
     try {
       _orderId = await createOrder(totalAmount);
       setState(() {}); // Update state to reflect order ID
     } catch (e) {
       print("Error creating order: $e");
-      // Handle error appropriately (e.g., show an error message to the user)
+      _showErrorDialog("Failed to create order. Please try again.");
     }
   }
-
 
   @override
   void dispose() {
@@ -110,12 +108,11 @@ class _FinalPaymentPageState extends State<FinalPaymentPage> {
   }
 
   Future<String> createOrder(double amount) async {
-    String keyId = 'YOUR_KEY_ID';  // Replace with your Key ID
-    String keySecret = 'YOUR_KEY_SECRET'; // Replace with your Key Secret
+    String keyId = 'rzp_test_Og5vcL9JiYlxQu';  // Replace with your Key ID
+    String keySecret = 'twmLT9kYlesRJiXQmLF3l5'; // Replace with your Key Secret
 
     // Combine Key ID and Key Secret
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$keyId:$keySecret'));
-
 
     final url = Uri.parse('https://api.razorpay.com/v1/orders');
     final headers = {
@@ -146,19 +143,15 @@ class _FinalPaymentPageState extends State<FinalPaymentPage> {
     }
   }
 
-
-
   void _openCheckout() async {
-
     if (_orderId == null) {
       print("Order ID is null. Cannot proceed.");
       _showErrorDialog("Failed to initiate payment due to missing order ID.");
       return;
     }
 
-
     var options = {
-      'key': 'YOUR_KEY_ID', // Replace with your Razorpay Key ID
+      'key': 'rzp_test_Og5vcL9JiYlxQu', // Replace with your Razorpay Key ID
       'amount': totalAmount * 100, // Convert to paise
       'name': 'Your App Name',
       'description': 'Payment for ${widget.cartItems.length} items',
@@ -180,7 +173,6 @@ class _FinalPaymentPageState extends State<FinalPaymentPage> {
     }
   }
 
-
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -197,11 +189,8 @@ class _FinalPaymentPageState extends State<FinalPaymentPage> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -324,7 +313,7 @@ class _FinalPaymentPageState extends State<FinalPaymentPage> {
     );
   }
 
-// Helper method to build a payment option
+  // Helper method to build a payment option
   Widget _buildPaymentOption({
     required IconData icon,
     required String title,
